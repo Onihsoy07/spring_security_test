@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,6 +26,13 @@ public class BoardController {
     @GetMapping("/board/writeForm")
     public String board() {
         return "board/writeForm";
+    }
+
+    @GetMapping("/board/{id}")
+    public String detail(@PathVariable final Long id,
+                         Model model) {
+        model.addAttribute("board", boardService.getBoard(id));
+        return "board/detail";
     }
 
 }

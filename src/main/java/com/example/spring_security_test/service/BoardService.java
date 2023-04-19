@@ -1,5 +1,6 @@
 package com.example.spring_security_test.service;
 
+import com.example.spring_security_test.data.dto.BoardDto;
 import com.example.spring_security_test.data.entity.Board;
 import com.example.spring_security_test.data.entity.Users;
 import org.springframework.data.domain.Page;
@@ -12,5 +13,7 @@ public interface BoardService {
     void writeBoard(Board board, Users users);
 
     Page<Board> mainBoardList(Pageable pageable);
+
+    BoardDto getBoard(Long id);
 
 }
