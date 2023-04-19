@@ -35,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BoardDto getBoard(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> {
@@ -43,4 +44,9 @@ public class BoardServiceImpl implements BoardService {
         return BoardMapping.convertToDto(board);
     }
 
+    @Override
+    @Transactional
+    public void deleteBoard(Long id) {
+        boardRepository.deleteById(id);
+    }
 }

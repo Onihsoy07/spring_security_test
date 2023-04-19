@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +27,13 @@ public class BoardApiController {
                                              @AuthenticationPrincipal final PrincipalDetail principal) {
         LOGGER.info("[post] /api/board 호출");
         boardService.writeBoard(board, principal.getUsers());
-        LOGGER.info("[post] /api/board 완료");
+        return ResponseEntity.status(HttpStatus.OK).body(1);
+    }
+
+    @DeleteMapping("/board/{id}")
+    public ResponseEntity<Integer> deleteBoard(@PathVariable final Long id) {
+        LOGGER.info("[delete] /api/board/{} 호출", id);
+        boardService.deleteBoard(id);
         return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 
