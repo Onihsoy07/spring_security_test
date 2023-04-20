@@ -33,11 +33,9 @@ let index = {
   deleteById: function() {
     let id = $('#id').text();
 
-    alert(id);
-
     $.ajax({
       type : "DELETE",
-      url : "/api/board/"+id,
+      url : "/api/board/"+ id,
       dataType:"json"
       }).done(function (res) {
         alert("삭제 완료");

@@ -21,10 +21,10 @@ public class Board extends BaseEntity {
     @Column(nullable = false, unique = true)
     private Long id;
 
-    @Column(nullable = false, unique = false, length = 100)
+    @Column(nullable = false, unique = false, length = 100, columnDefinition = "VARCHAR(255) CHARACTER SET UTF8")
     private String title;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false, unique = false, columnDefinition = "VARCHAR(255) CHARACTER SET UTF8")
     @Lob
     private String content;
 
@@ -32,7 +32,7 @@ public class Board extends BaseEntity {
     @ColumnDefault("0")
     private int viewCount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private Users users;
 

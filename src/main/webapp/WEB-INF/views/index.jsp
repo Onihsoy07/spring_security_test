@@ -24,7 +24,7 @@
             <li class="page-item"><a class="page-link" href="/?page=${boards.number-1}">Previous</a></li>
         </c:otherwise>
       </c:choose>
-      <c:forEach var="cnt" begin="0" end="${boards.totalPages-1}">
+      <c:forEach var="cnt" begin="0" end="${boards.totalPages}">
         <c:choose>
           <c:when test="${boards.number == cnt}">
             <li class="page-item active"><a class="page-link" href="/main?page=${cnt}">${cnt+1}</a></li>

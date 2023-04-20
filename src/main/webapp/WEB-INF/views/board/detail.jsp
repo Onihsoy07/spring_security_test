@@ -9,8 +9,8 @@
           <button id="btn-delete" class="btn btn-danger">삭제</button>
         </c:if>
         <div>
-            작성자 : <span><i>${board.users.username}</i>&nbsp;&nbsp;</span>
-            글 번호 : <span id="id"><i>${board.id}</i>&nbsp;&nbsp;</span>
+            작성자 : <span><i>${board.users.username}</i></span>&nbsp;&nbsp;
+            글 번호 : <span id="id"><i>${board.id}</i></span>&nbsp;&nbsp;
             조회수 : <span><i>${board.viewCount}</i></span>
         </div>
         <br>
