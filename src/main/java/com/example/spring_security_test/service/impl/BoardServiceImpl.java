@@ -53,13 +53,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public void deleteBoard(Long id) {
-//        boardRepository.deleteById(id);
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException(String.format("Board ID : %d 로 찾을 수 없습니다.", id));
-                });
-        LOGGER.info("Board ID : {} 삭제 중", id);
-        boardRepository.delete(board);
+        boardRepository.deleteById(id);
         LOGGER.info("Board ID : {} 삭제 완료", id);
     }
 }
