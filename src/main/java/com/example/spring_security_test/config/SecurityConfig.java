@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()  //csfr 토큰 비활성화
                 .authorizeRequests()
-                  .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
+                  .antMatchers("/", "/main", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
                   .antMatchers("/h2-console").permitAll()
                   .anyRequest().authenticated()
                 .and()

@@ -34,7 +34,7 @@ public class Users extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();
 
 }

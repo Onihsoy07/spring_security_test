@@ -24,13 +24,13 @@
             <li class="page-item"><a class="page-link" href="/?page=${boards.number-1}">Previous</a></li>
         </c:otherwise>
       </c:choose>
-      <c:forEach var="cnt" begin="0" end="${boards.totalPages}">
+      <c:forEach var="cnt" begin="1" end="${boards.totalPages}">
         <c:choose>
-          <c:when test="${boards.number == cnt}">
-            <li class="page-item active"><a class="page-link" href="/main?page=${cnt}">${cnt+1}</a></li>
+          <c:when test="${boards.number == cnt-1}">
+            <li class="page-item active"><a class="page-link" href="/main?page=${cnt-1}">${cnt}</a></li>
           </c:when>
           <c:otherwise>
-            <li class="page-item"><a class="page-link" href="/main?page=${cnt}">${cnt+1}</a></li>
+            <li class="page-item"><a class="page-link" href="/main?page=${cnt-1}">${cnt}</a></li>
           </c:otherwise>
         </c:choose>
       </c:forEach>
