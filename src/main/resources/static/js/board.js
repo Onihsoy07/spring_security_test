@@ -31,11 +31,11 @@ let index = {
   },
 
   deleteById: function() {
-    let id = $('#id').text();
+    let id = $("#id").text();
 
     $.ajax({
       type : "DELETE",
-      url : "/api/board/"+ id,
+      url : "/api/board/" + id,
       dataType:"json"
       }).done(function (res) {
         alert("삭제 완료");

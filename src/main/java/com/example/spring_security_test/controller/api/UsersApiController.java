@@ -55,10 +55,10 @@ public class UsersApiController {
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<String> deleteUsers(@PathVariable final Long id) {
+    public ResponseEntity<Integer> deleteUsers(@PathVariable final Long id) {
         LOGGER.info("[delete] api/user/{} 실행", id);
         usersService.deleteUsers(id);
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("id : %d 의 Users를 삭제하였습니다.", id));
+        return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 
 }
