@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -46,18 +47,19 @@ public class UsersApiController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<UsersDto> updateUsers(@PathVariable final Long id,
+    public ResponseEntity<Integer> updateUsers(@PathVariable final Long id,
                                                 @RequestBody final UsersDto usersDto) {
         LOGGER.info("[put] api/user/{} 실행", id);
         UsersDto dto = usersService.updateUsers(id, usersDto);
-
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+        System.out.println(dto.toString());
+        return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Integer> deleteUsers(@PathVariable final Long id) {
         LOGGER.info("[delete] api/user/{} 실행", id);
         usersService.deleteUsers(id);
+        SecurityContextHolder.clearContext();
         return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 

@@ -38,15 +38,15 @@ let index = {
   },
 
   update: function() {
+    let id = $("#id").val();
     let data = {
-      id: $("#userId").val(),
       password: $("#password").val(),
       email: $("#email").val()
     };
 
     $.ajax({
       type : "PUT",
-      url : "/user",
+      url : "/user/" + id,
       contentType: "application/json;charset=utf-8",
       dataType:"json",
       data : JSON.stringify(data)

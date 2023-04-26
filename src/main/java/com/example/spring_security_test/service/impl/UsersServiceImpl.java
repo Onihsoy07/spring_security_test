@@ -7,6 +7,10 @@ import com.example.spring_security_test.data.mapping.UsersMapping;
 import com.example.spring_security_test.data.repository.UsersRepository;
 import com.example.spring_security_test.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,8 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final AuthenticationManager authenticationManager;
 
 
     @Override
@@ -43,11 +49,17 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public UsersDto updateUsers(Long id, UsersDto requestUserDto) {
-        Users user = findUser(id);
-        user.setPassword(requestUserDto.getPassword());
-        user.setEmail(requestUserDto.getEmail());
+        System.out.println(requestUserDto.toString());
+        Users updateUser = findUser(id);
+        updateUser.setPassword(requestUserDto.getPassword());
+        updateUser.setEmail(requestUserDto.getEmail());
 
-        return UsersMapping.convertToDto(user);
+        usersRepository.save(updateUser);
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateUser.getUsername(), updateUser.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return UsersMapping.convertToDto(updateUser);
     }
 
     @Override
