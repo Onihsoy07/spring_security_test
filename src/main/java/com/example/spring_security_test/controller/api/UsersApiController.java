@@ -51,8 +51,8 @@ public class UsersApiController {
                                                 @RequestBody final UsersDto usersDto) {
         LOGGER.info("[put] api/user/{} 실행", id);
         UsersDto dto = usersService.updateUsers(id, usersDto);
-        System.out.println(dto.toString());
-        return ResponseEntity.status(HttpStatus.OK).body(1);
+        LOGGER.info("[put] api/user/{} 완료", id);
+        return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK.value());
     }
 
     @DeleteMapping("/user/{id}")

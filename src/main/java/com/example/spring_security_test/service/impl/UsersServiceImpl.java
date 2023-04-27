@@ -7,6 +7,8 @@ import com.example.spring_security_test.data.mapping.UsersMapping;
 import com.example.spring_security_test.data.repository.UsersRepository;
 import com.example.spring_security_test.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +28,8 @@ public class UsersServiceImpl implements UsersService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final AuthenticationManager authenticationManager;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(UsersServiceImpl.class);
 
 
     @Override
@@ -49,15 +53,18 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public UsersDto updateUsers(Long id, UsersDto requestUserDto) {
-        System.out.println(requestUserDto.toString());
         Users updateUser = findUser(id);
-        updateUser.setPassword(requestUserDto.getPassword());
+        updateUser.setPassword(bCryptPasswordEncoder.encode(requestUserDto.getPassword()));
         updateUser.setEmail(requestUserDto.getEmail());
 
         usersRepository.save(updateUser);
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateUser.getUsername(), updateUser.getPassword()));
+        LOGGER.info("user update 완료");
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(updateUser.getUsername(), requestUserDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        LOGGER.info("Context Authentication 변경 완료");
 
         return UsersMapping.convertToDto(updateUser);
     }
