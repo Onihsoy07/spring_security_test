@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,5 +37,8 @@ public class Board extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private Users users;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Reply> replyList = new ArrayList<>();
 
 }

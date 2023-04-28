@@ -8,7 +8,14 @@ let index = {
       this.deleteById();
     });
 
+    $("#btn-update").on("click", ()=>{
+      this.update();
+    });
+
   },
+
+//  document.getElementById("btn-save").addEventListener('click',save);
+//  document.getElementById("btn-delete").addEventListener('click',deleteById);
 
   save: function() {
     let data = {
@@ -42,6 +49,28 @@ let index = {
         location.href="/";
       }).fail(function (error){
         alert("삭제 실패");
+      });
+  },
+
+  update: function() {
+    let id = $("#id").val();
+
+    let data = {
+      title: $('#title').val(),
+      content: $('#content').val()
+    };
+
+    $.ajax({
+      type : "PUT",
+      url : "/api/board/" + id,
+      contentType: "application/json;charset=utf-8",
+      dataType:"json",
+      data : JSON.stringify(data)
+      }).done(function (res) {
+        alert("수정 완료");
+        location.href="/";
+      }).fail(function (error){
+        alert("수정 실패");
       });
   }
 

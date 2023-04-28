@@ -2,9 +2,11 @@ package com.example.spring_security_test.service.impl;
 
 import com.example.spring_security_test.data.dto.BoardDto;
 import com.example.spring_security_test.data.entity.Board;
+import com.example.spring_security_test.data.entity.Reply;
 import com.example.spring_security_test.data.entity.Users;
 import com.example.spring_security_test.data.mapping.BoardMapping;
 import com.example.spring_security_test.data.repository.BoardRepository;
+import com.example.spring_security_test.data.repository.ReplyRepository;
 import com.example.spring_security_test.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,8 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
+
+    private final ReplyRepository replyRepository;
 
     private final Logger LOGGER = LoggerFactory.getLogger(BoardServiceImpl.class);
 
@@ -55,5 +59,22 @@ public class BoardServiceImpl implements BoardService {
     public void deleteBoard(Long id) {
         boardRepository.deleteById(id);
         LOGGER.info("Board ID : {} 삭제 완료", id);
+    }
+
+    @Override
+    public List<Reply> viewReply(Long id) {
+        return replyRepository.findByBoard_IdOrderByCreatedDateAsc(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateBoard(Long id, BoardDto boardDto) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException(String.format("Board ID : %d 로 찾을 수 없습니다.", id));
+                });
+        board.setTitle(boardDto.getTitle());
+        board.setContent(boardDto.getContent());
+        boardRepository.save(board);
     }
 }

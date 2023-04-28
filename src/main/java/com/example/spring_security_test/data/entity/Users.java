@@ -37,4 +37,6 @@ public class Users extends BaseEntity{
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Reply> replyList = new ArrayList<>();
 }

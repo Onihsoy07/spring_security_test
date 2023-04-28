@@ -4,10 +4,10 @@ let index = {
       this.save();
     });
     $("#btn-update").on("click", ()=>{
-          this.update();
+      this.update();
     });
     $("#btn-delete").on("click", ()=>{
-          this.broke();
+      this.broke();
     });
 
   },

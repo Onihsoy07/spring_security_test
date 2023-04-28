@@ -1,6 +1,7 @@
 package com.example.spring_security_test.controller.api;
 
 import com.example.spring_security_test.config.auth.PrincipalDetail;
+import com.example.spring_security_test.data.dto.BoardDto;
 import com.example.spring_security_test.data.entity.Board;
 import com.example.spring_security_test.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,14 @@ public class BoardApiController {
     public ResponseEntity<Integer> deleteBoard(@PathVariable final Long id) {
         LOGGER.info("[delete] /api/board/{} 호출", id);
         boardService.deleteBoard(id);
+        return ResponseEntity.status(HttpStatus.OK).body(1);
+    }
+
+    @PutMapping("/board/{id}")
+    public ResponseEntity<Integer> updateBoard(@PathVariable final Long id,
+                                               @RequestBody final BoardDto boardDto) {
+        LOGGER.info("[put] /api/board/{} 호출", id);
+        boardService.updateBoard(id, boardDto);
         return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 

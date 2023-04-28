@@ -5,7 +5,7 @@
     <div class="container">
         <button class="btn btn-secondary" onclick="location.href='/'">목록</button>
         <c:if test="${board.users.userId == principal.users.userId}">
-          <a href="/board/${board.id}/updateForm" class="btn btn-warning">수정</a>
+          <a href="/board/updateForm/${board.id}" class="btn btn-warning">수정</a>
           <button id="btn-delete" class="btn btn-danger">삭제</button>
         </c:if>
         <div>
@@ -23,7 +23,21 @@
         <div>
             <div style="font-size:2em;">${board.content}</div>
         </div>
+
+        <br><hr><br>
+
+        <div class="form-group">
+          <label for="comment">Comment:</label>
+          <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <button id="btn-reply" class="btn btn-primary">댓글</button>
+
+
+        <br>
+
     </div>
 
-<script src="/js/board.js"></script>
+    <script src="/js/board.js"></script>
+    <script src="/js/reply.js"></script>
+
 <%@ include file = "../layout/footer.jsp"%>
