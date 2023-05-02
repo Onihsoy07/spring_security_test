@@ -1,9 +1,13 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3307/test
+    url: ENC(SK7jyia9iI3/yPmjiOQ6BjpbKFXPg1255RhU7Ogq4ZUvLxmKSvS+eSDH4wYlnboZ)
+    #ENC(SK7jyia9iI3/yPmjiOQ6BjpbKFXPg1255RhU7Ogq4ZUvLxmKSvS+eSDH4wYlnboZ)
+    #jdbc:mariadb://localhost:3307/test
     username: root
+    #ENC(7JXdBQdvO2cWVGCbVhfZgQ==)
     password: 0880
+    #ENC(zUjjuL3jFQrikWI2mzA2Tw==)
 
   jpa:
     hibernate:
@@ -32,3 +36,20 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+#admin.jasypt.password
+admin:
+  jasypt:
+    password: ${Jasypt_password}
+  login_API:
+    master_key: ENC(amuwJ00ijpDJLAoMg+aeiRbapaYuF3qr)
+    #f58T93KhR7
+    kakao_API:
+      key: ENC(/yGX26voq6vE4IZExW2MRcTWoFMuijLvhhgHRSU6EiHKZaJGMyltxIlfzFCO0SC2)
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    property:
+      prefix: ENC(
+      suffix: )
