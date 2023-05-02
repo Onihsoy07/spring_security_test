@@ -28,16 +28,32 @@
 
         <div class="form-group">
           <label for="comment">Comment:</label>
-          <textarea class="form-control" rows="5" id="comment"></textarea>
+          <textarea class="form-control" rows="1" id="comment"></textarea>
         </div>
         <button id="btn-reply" class="btn btn-primary">댓글</button>
 
 
-        <br>
+        <br><br>
+
+        <div class="card">
+            <div class="card-header">댓글</div>
+            <c:forEach var="reply" items="${board.replyList}">
+                <div class="card d-flex">
+                    <div class="d-flex">
+                        ${reply.comment}
+                    </div>
+                    <div class="d-flex">
+                        <i>작성자 : ${reply.users.username}</i>
+                    </div>
+                    <div class="d-flex">
+                        ${reply.createdDate}
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
 
     </div>
 
     <script src="/js/board.js"></script>
-    <script src="/js/reply.js"></script>
 
 <%@ include file = "../layout/footer.jsp"%>

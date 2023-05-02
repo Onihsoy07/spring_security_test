@@ -1,5 +1,6 @@
 package com.example.spring_security_test.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,6 +40,8 @@ public class Board extends BaseEntity {
     private Users users;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<Reply> replyList = new ArrayList<>();
+    @OrderBy("createdDate Desc")
+    @JsonIgnoreProperties({"board", "users"})
+    private List<Reply> replyList;
 
 }

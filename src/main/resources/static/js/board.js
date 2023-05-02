@@ -12,6 +12,11 @@ let index = {
       this.update();
     });
 
+    $("#btn-reply").on("click", ()=>{
+      this.saveReply();
+    });
+
+
   },
 
 //  document.getElementById("btn-save").addEventListener('click',save);
@@ -71,6 +76,27 @@ let index = {
         location.href="/";
       }).fail(function (error){
         alert("수정 실패");
+      });
+  },
+
+  saveReply: function() {
+    let id = $("#id").text();
+
+    let data = {
+      comment: $("#comment").val()
+    };
+
+    $.ajax({
+      type : "POST",
+      url : "/api/reply/board/" + id,
+      contentType: "application/json;charset=utf-8",
+      dataType:"json",
+      data : JSON.stringify(data)
+      }).done(function (res) {
+        alert("댓글 쓰기 완료");
+        location.reload();
+      }).fail(function (error){
+        alert("댓글 쓰기 실패");
       });
   }
 

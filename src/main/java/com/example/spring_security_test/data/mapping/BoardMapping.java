@@ -12,6 +12,7 @@ public class BoardMapping {
                 .content(board.getContent())
                 .viewCount(board.getViewCount())
                 .users(board.getUsers())
+                .replyList(board.getReplyList())
                 .build();
         return dto;
     }
@@ -23,6 +24,7 @@ public class BoardMapping {
                 .content(dto.getContent())
                 .viewCount(dto.getViewCount())
                 .users(dto.getUsers())
+                .replyList(dto.getReplyList())
                 .build();
         return board;
     }

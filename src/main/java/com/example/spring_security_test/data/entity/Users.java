@@ -1,5 +1,6 @@
 package com.example.spring_security_test.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,10 @@ public class Users extends BaseEntity{
     private Role role;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Board> boardList = new ArrayList<>();
+    @JsonIgnoreProperties({"users", "reply"})
+    private List<Board> boardList;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List<Reply> replyList = new ArrayList<>();
+    @JsonIgnoreProperties({"users", "board"})
+    private List<Reply> replyList;
 }
